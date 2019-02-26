@@ -1,0 +1,96 @@
+.page-not-found {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #ffa502;
+    height: 100vh;
+    width: 100%;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    & h1{
+        font-size: 60px;
+        color: #fff;
+        margin-bottom: 30px;
+    }
+}
+.fa-coffee {
+    position: relative;
+}
+.smokes {
+    &:nth-child(1)::after{
+        content: "";
+        width: 5px;
+        position: absolute;
+        bottom: 80%;
+        left: 60%;
+        background: #fff;
+        transform: translate(-50%, -50%);
+        animation: smoke 2s infinite;
+    }
+    &:nth-child(2)::after{
+        content: "";
+        width: 5px;
+        position: absolute;
+        bottom: 80%;
+        left: 50%;
+        background: #fff;
+        transform: translate(-50%, -50%);
+        animation: smoke 1.8s infinite;
+    }
+    &:nth-child(3)::after{
+        content: "";
+        width: 5px;
+        position: absolute;
+        bottom: 80%;
+        left: 40%;
+        background: #fff;
+        transform: translate(-50%, -50%);
+        animation: smoke 1.6s infinite;
+    }
+}
+
+.go-home {
+    height: 70px;
+    width: 70px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none !important;
+    position: relative;
+    color: #fff;
+    float: left;
+    & i{
+        font-size: 30px;
+        color: #ffa502;
+    }
+    &:hover i {
+        animation: degIcon 0.2s linear;
+    }
+}
+
+@keyframes smoke {
+    from {
+        height: 0;
+        opacity: 1;
+    }
+    
+    to {
+        height: 40px;
+        opacity: 0;
+    }
+}
+
+@keyframes degIcon {
+    from {
+        transform: rotate(0deg)
+    }
+    
+    to {
+        transform: rotate(360deg)
+    }
+}

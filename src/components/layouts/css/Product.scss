@@ -1,0 +1,62 @@
+.product-info {
+    overflow: hidden;
+    & img {
+        max-width: 100% !important;
+        object-fit: contain;
+        height: 200px;
+        max-height: 200px;
+        transition: transform 0.4s ease !important;
+        &:hover{
+            transform: scale(1.1);
+        }
+    }
+    & .product-link{
+        background: #f6f6f6;
+        overflow: hidden;
+    }
+}
+
+.product-details {
+    & .card-title {
+        display: flex;
+    }
+    & .product-name {
+        flex: 1;
+        text-decoration: none !important;
+        flex-basis: 90%;
+        color: #000;
+        transition: .4s;
+        text-transform: uppercase;
+        &:hover{
+            color: #ffa502;
+        }
+    }
+
+    & .product-price {
+        flex: 1;
+        flex-basis: 10%;
+        color: #ffa502;
+    }
+
+    & .add-to-card-box {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    & .add-to-card-btn {
+        border: none;
+        background-color: #ffa502;
+        color: #fff;
+        padding: 10px 15px;
+        flex: 1;
+        cursor: pointer;
+        font-size: 18px;
+        outline: none;
+        &:disabled {
+            background: #000;
+            color: #fff;
+        }
+    }
+}

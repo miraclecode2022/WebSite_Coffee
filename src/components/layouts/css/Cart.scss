@@ -1,0 +1,135 @@
+.param {
+    margin-bottom: 0;
+    line-height: 1.4;
+    margin-left: 10px;
+    & dt {
+        margin: 0;
+        margin-right: 7px;
+        font-weight: 600;
+    }
+    & dd {
+        margin: 0;
+        vertical-align: middle;
+    } 
+}
+.param-inline{
+    & dt {
+        display: inline-block;
+    }
+    & dd {
+        vertical-align: middle;
+        display: inline-block;
+    }
+}
+
+.shopping-cart-wrap {
+    & .price {
+        color: #007bff;
+        font-size: 18px;
+        font-weight: bold;
+        margin-right: 5px;
+        display: block;
+    }
+    & td {
+        vertical-align: middle;
+    }
+}
+
+var {
+    font-style: normal;
+}
+
+.media {
+    align-items: center;
+    & img {
+        margin-right: 1rem;
+    }
+}
+.img-sm {
+    width: 90px;
+    max-height: 75px;
+    object-fit: cover;
+}
+
+.cart-component {
+    margin: 20px 0;
+}
+
+figure {
+    margin: 0;
+}
+
+.media-body{
+    & .text-truncate{
+        margin: 0 0 0 10px !important;
+    }
+}
+
+.checkout-btn {
+    border: 1px solid #ffa502;
+    outline: none !important;
+    color: #ffa502;
+    background: transparent;
+    padding: 10px 50px;
+    cursor: pointer;
+    font-size: 20px;
+    position: relative;
+    transition: color .5s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0s;
+    margin: 20px 0;
+    float: right;
+    &::before{
+        position: absolute;
+        display: block;
+        background: #EA8025;
+        content: '';
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        transform: scale(0, 1);
+        transform-origin: left center;
+        transition: transform 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    }
+    &:hover{
+        color: #fff;
+        z-index: 1;
+        background: transparent;
+        &::before{
+            transform: scale(1, 1);
+        }
+    }
+}
+
+.box-quality {
+    border: 2px solid #000;
+    background: #fff !important;
+    color: #000 !important;
+}
+
+.btn-quality {
+    padding: 0 5px;
+    background: #000;
+    color: #fff;
+    border: 0;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 0 5px;
+    width: 30px;
+    height: 30px;
+    outline: none;
+    margin-right: 5px;
+    line-height: 30px;
+}
+
+.box-add {
+    display: flex;
+}
+
+.total-cart {
+    padding: 10px;
+    text-align: right;
+    background: #f1f2f6;
+}
