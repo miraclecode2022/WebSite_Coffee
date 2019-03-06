@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { storeProducts } from './components/data/data'
 
 const ReactContext = React.createContext()
 
@@ -13,6 +12,15 @@ class ReactProvider extends Component {
             cartTotal: 0,
             cartSubtotal: 0,
             cartTax: 0,
+            isLoading: true,
+            orders: [],
+            firstname: "",
+            lastname: "",
+            address: "",
+            city: "",
+            district: "",
+            phone: "",
+            email: ""
         }
     }
 
@@ -21,19 +29,27 @@ class ReactProvider extends Component {
     }
 
     getItem = (id) => {
-        const product = this.state.product.find(item => item.id === id)
+        const product = this.state.product.find(item => item._id === id)
         return product
     }
 
     SetProduct = () => {
-        let tempProducts = []
-        storeProducts.forEach(item => {
-            const singleItem = { ...item }
-            tempProducts = [...tempProducts, singleItem]
+        this.setState({ isLoading : false})
+        fetch(`https://coffee-code-6868.herokuapp.com/products`, {
+            method: 'GET'
         })
-        this.setState(() => {
-            return { product: tempProducts }
+        .then(result => result.json())
+        .then(result => {
+            let tempProducts = []
+            result.products.forEach(item => {
+                const singleItem = { ...item }
+                tempProducts = [...tempProducts, singleItem]
+            })
+            this.setState(() => {
+                return { product: tempProducts, isLoading: true }
+            })
         })
+        .catch(err => console.log(err))  
     }
 
     handleDetails = (id) => {
@@ -46,7 +62,7 @@ class ReactProvider extends Component {
     removeItem = (id) => {
         let tempProducts = [...this.state.product]
         let tempCart = [...this.state.cart]
-        tempCart = tempCart.filter(item => item.id !== id)
+        tempCart = tempCart.filter(item => item._id !== id)
         const index = tempProducts.indexOf(this.getItem(id))
         let removeProduct = tempProducts[index]
         removeProduct.inCart = false
@@ -101,7 +117,7 @@ class ReactProvider extends Component {
 
     inCrement = (id) => {
         let tempCart = [...this.state.cart]
-        const selectedProduct = tempCart.find(item => item.id === id)
+        const selectedProduct = tempCart.find(item => item._id === id)
         const index = tempCart.indexOf(selectedProduct)
         const product = tempCart[index]
         product.count += 1
@@ -113,7 +129,7 @@ class ReactProvider extends Component {
 
     deCrement = (id) => {
         let tempCart = [...this.state.cart]
-        const selectedProduct = tempCart.find(item => item.id === id)
+        const selectedProduct = tempCart.find(item => item._id === id)
         const index = tempCart.indexOf(selectedProduct)
         const product = tempCart[index]
         product.count -= 1
@@ -127,6 +143,55 @@ class ReactProvider extends Component {
         }
     }
 
+    handleOrder = (e) => {
+        e.preventDefault()
+        let tempOrder = []
+        this.state.cart.forEach(item => {
+            let singleOrder = { ...item }
+            delete singleOrder.desc
+            delete singleOrder.image
+            delete singleOrder.inCart
+            delete singleOrder.name
+            delete singleOrder.type
+            tempOrder = [...tempOrder, singleOrder]
+        })
+        this.setState(() => {
+            return { orders: tempOrder }
+        }, () => {
+            fetch(`http://localhost:8080/order/create`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    customer: {
+                        firstname: this.state.firstname,
+                        lastname: this.state.lastname,
+                        address: this.state.address,
+                        city: this.state.city,
+                        district: this.state.district,
+                        phone: this.state.phone,
+                        email: this.state.email
+                    },
+                    orders: this.state.orders
+                })
+            })
+            .then(result => result.json())
+            .then(result => {
+                if(result.status){
+                    window.location = '/'
+                }
+            })
+            .catch(err => console.log(err))
+        })
+    }
+
+    handleChange = e => {
+        this.setState({
+            [e.target.name] : e.target.value
+        })
+    }
+
     render() {
         return (
             <ReactContext.Provider value={
@@ -136,7 +201,9 @@ class ReactProvider extends Component {
                     addToCart: this.addToCart,
                     clearCart: this.clearCart,
                     deCrement: this.deCrement,
-                    inCrement: this.inCrement
+                    inCrement: this.inCrement,
+                    handleOrder: this.handleOrder,
+                    handleChange: this.handleChange
                 }
             }>
                 { this.props.children }

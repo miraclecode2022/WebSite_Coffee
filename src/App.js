@@ -6,6 +6,7 @@ import Cart from './components/layouts/Cart'
 import ProductList from './components/layouts/ProductList'
 import NotFound from './components/layouts/NotFound'
 import Footer from './components/layouts/Footer'
+import ProductDetails from './components/layouts/products/ProductDetails'
 import './App.css'
 
 class App extends Component {
@@ -17,6 +18,7 @@ class App extends Component {
           <Route path="/" exact component={Index}/>
           <Route path="/cart" component={Cart}/>
           <Route path="/products" component={ProductList}/>
+          <Route path="/product/:name.:id.html" render={(props) => <ProductDetails {...props} />}/>
           <Route component={NotFound}/>
         </Switch>
         <Footer/>

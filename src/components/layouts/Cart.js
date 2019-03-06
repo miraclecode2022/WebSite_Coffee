@@ -18,34 +18,44 @@ class Cart extends Component {
                                 return (
                                     value.cart && value.cart.length
                                     ?
-                                        <form>
+                                        <form onSubmit={value.handleOrder}>
                                             <div className="card">
                                                 <div className="card-body">
                                                     <div className="form-row">
                                                         <div className="form-group col-md-6">
                                                             <label htmlFor="firstname">Họ</label>
-                                                            <input type="text" className="form-control" id="firstname" placeholder="Họ" />
+                                                            <input type="text" className="form-control" id="firstname" name="firstname" placeholder="Họ" onChange={value.handleChange} required={true} />
                                                         </div>
                                                         <div className="form-group col-md-6">
                                                         <label htmlFor="lastname">Tên</label>
-                                                        <input type="text" className="form-control" id="lastname" placeholder="Tên" />
+                                                        <input type="text" className="form-control" id="lastname" name="lastname" placeholder="Tên" onChange={value.handleChange} required={true} />
                                                         </div>
                                                     </div>
                                                     <div className="form-group">
                                                         <label htmlFor="address">Địa chỉ</label>
-                                                        <input type="text" className="form-control" id="address" placeholder="123 duong Le Loi." />
+                                                        <input type="text" className="form-control" id="address" name="address" placeholder="123 duong Le Loi." onChange={value.handleChange} required={true} />
                                                     </div>
                                                     <div className="form-row">
                                                         <div className="form-group col-md-6">
-                                                            <label htmlFor="city">Thành phố</label>
-                                                            <input type="text" className="form-control" id="city" placeholder="Ho Chi Minh City" />
+                                                            <label htmlFor="city">City</label>
+                                                            <input type="text" className="form-control" id="city" name="city" placeholder="Ho Chi Minh City" onChange={value.handleChange} required={true} />
                                                         </div>
                                                         <div className="form-group col-md-6">
-                                                        <label htmlFor="county">Quận</label>
-                                                        <select id="county" className="form-control" onChange={(e) => console.log(e.target.value)}>
+                                                        <label htmlFor="district">District</label>
+                                                        <select id="district" className="form-control" name="district" onChange={value.handleChange} >
                                                             <option value="1">Cam</option>
                                                             <option value="2">Quýt</option>
                                                         </select>
+                                                        </div>
+                                                    </div>
+                                                    <div className="form-row">
+                                                        <div className="form-group col-md-6">
+                                                            <label htmlFor="phone">Phone</label>
+                                                            <input type="text" className="form-control" id="phone" name="phone" placeholder="Ho Chi Minh City" onChange={value.handleChange} required={true} />
+                                                        </div>
+                                                        <div className="form-group col-md-6">
+                                                        <label htmlFor="email">Email</label>
+                                                        <input className="form-control" id="email" name="email" onChange={value.handleChange} required={true} />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -79,9 +89,9 @@ class Cart extends Component {
                                                                             </td>
                                                                             <td> 
                                                                                 <span className="box-add">
-                                                                                    <span type="button" className="btn btn-quality" onClick={() => value.deCrement(d.id)}>-</span>
+                                                                                    <span type="button" className="btn btn-quality" onClick={() => value.deCrement(d._id)}>-</span>
                                                                                     <span type="button" className="btn btn-quality box-quality">{d.count}</span>
-                                                                                    <span type="button" className="btn btn-quality" onClick={() => value.inCrement(d.id)}>+</span>
+                                                                                    <span type="button" className="btn btn-quality" onClick={() => value.inCrement(d._id)}>+</span>
                                                                                 </span>
                                                                             </td>
                                                                             <td> 
@@ -90,7 +100,7 @@ class Cart extends Component {
                                                                                 </div>
                                                                             </td>
                                                                             <td className="text-right"> 
-                                                                                <button type="button" onClick={() => value.removeItem(d.id)} className="btn btn-outline-danger"><i className="fas fa-trash-alt"></i></button>
+                                                                                <button type="button" onClick={() => value.removeItem(d._id)} className="btn btn-outline-danger"><i className="fas fa-trash-alt"></i></button>
                                                                             </td>
                                                                         </tr>
                                                                     )

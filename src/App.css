@@ -10,3 +10,30 @@ body {
 .bg-dark {
   background-color: #000 !important;
 }
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 100%;
+  height: 46px;
+  transform: translate(0, 25%);
+  margin: 10px 0;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 46px;
+  height: 46px;
+  margin: -10px auto;
+  border-radius: 50%;
+  border: 5px solid #ffa502;
+  border-color: #ffa502 transparent #ffa502 transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
